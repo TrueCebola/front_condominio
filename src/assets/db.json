@@ -1,0 +1,269 @@
+{
+  "autorizacao": [
+    {
+      "id": 1,
+      "id_pessoa_autoriza": 1,
+      "id_pessoa_entrada": 2,
+      "observacao": "teste",
+      "hora_data": "2023-03-19T18:00:00.000Z",
+      "tipo_autorizacao_agenda": "agendamento",
+      "id_veiculo": 2,
+      "id_portaria": 1
+    },
+    {
+      "id": 2,
+      "id_pessoa_autoriza": 2,
+      "id_pessoa_entrada": 1,
+      "observacao": "",
+      "hora_data": "2023-03-19T18:00:00.000Z",
+      "tipo_autorizacao_agenda": "autorizacao",
+      "id_veiculo": 1,
+      "id_portaria": 1
+    },
+    {
+      "id": 4,
+      "id_pessoa_autoriza": 3,
+      "id_pessoa_entrada": 3,
+      "observacao": "teste 1",
+      "hora_data": "2023-10-31",
+      "id_veiculo": 3,
+      "id_portaria": 3,
+      "tipo_autorizacao_agenda": "agendamento"
+    },
+    {
+      "id": 5,
+      "id_pessoa_autoriza": 2,
+      "id_pessoa_entrada": 2,
+      "observacao": "Auto-autorização",
+      "hora_data": "2023-10-19",
+      "id_veiculo": 2,
+      "id_portaria": 1,
+      "tipo_autorizacao_agenda": "agendamento"
+    }
+  ],
+  "condominio": [
+    {
+      "id": 1,
+      "lote_numero": 1,
+      "quadra": "Quadra 1"
+    },
+    {
+      "id": 2,
+      "lote_numero": 2,
+      "quadra": "Quadra 2"
+    },
+    {
+      "id": 3,
+      "lote_numero": 3,
+      "quadra": "Quadra 3"
+    }
+  ],
+  "encomenda": [
+    {
+      "id": 1,
+      "id_pessoa": 1,
+      "id_portaria": 1,
+      "observacoes": " ",
+      "tipo_encomenda": "Mercado Livre",
+      "active": 0
+    },
+    {
+      "id": 3,
+      "id_pessoa": 3,
+      "id_portaria": 1,
+      "observacoes": "NB117430310BR",
+      "tipo_encomenda": "Correios",
+      "active": 1
+    }
+  ],
+  "lote": [
+    {
+      "id": 1,
+      "estado": "Ocupado",
+      "id_pessoa": 1,
+      "id_lote": 1
+    },
+    {
+      "id": 2,
+      "estado": "Ocupado",
+      "id_pessoa": 2,
+      "id_lote": 2
+    }
+  ],
+  "movimentacao": [
+    {
+      "id": 1,
+      "id_portaria": 1,
+      "id_pessoa": 1,
+      "tipo_movimentacao": "Entrada",
+      "id_veiculo": 1,
+      "id_local": 2,
+      "id_autorizacao_agenda": 2,
+      "observacoes": "teste"
+    },
+    {
+      "id": 3,
+      "tipo_movimentacao": "Saida",
+      "id_pessoa": 2,
+      "id_veiculo": 2,
+      "id_autorizacao_agenda": 1,
+      "id_local": 1,
+      "id_portaria": 1,
+      "observacoes": "teste alterar 2: electric boogaloo"
+    },
+    {
+      "id": 4,
+      "tipo_movimentacao": "Saida",
+      "id_pessoa": 2,
+      "id_veiculo": 2,
+      "id_autorizacao_agenda": 2,
+      "id_local": 2,
+      "id_portaria": 1,
+      "observacoes": "Ir ao shopping"
+    }
+  ],
+  "pessoa": [
+    {
+      "id": 1,
+      "nome": "João",
+      "telefone": "9999999999",
+      "email": "ZzQ7l@example.com",
+      "cpf_cnpj": "99999999999",
+      "rua": "Rua",
+      "cidade": "Cidade",
+      "estado": "Estado",
+      "cep": "99999999",
+      "pais": "Brasil",
+      "tipo_pessoa": 1,
+      "active": 1
+    },
+    {
+      "id": 2,
+      "nome": "Maria",
+      "telefone": "99999999999",
+      "email": "ZzQ7l@example.com",
+      "cpf_cnpj": "99999999999999",
+      "rua": "Rua",
+      "cidade": "Cidade",
+      "estado": "Estado",
+      "cep": "99999999",
+      "pais": "Brasil",
+      "tipo_pessoa": 1,
+      "active": 1
+    },
+    {
+      "id": 3,
+      "nome": "José",
+      "telefone": "9999999999",
+      "email": "ZzQ7l@example.com",
+      "cpf_cnpj": "99999999999",
+      "rua": "Rua",
+      "cidade": "Cidade",
+      "estado": "Estado",
+      "cep": "99999999",
+      "pais": "Brasil",
+      "tipo_pessoa": 1,
+      "active": 1
+    }
+  ],
+  "portaria": [
+    {
+      "id": 1,
+      "portaria_nome": "Portaria 1",
+      "id_pessoa_funcionario": 1,
+      "turno_trabalho": "Matutino",
+      "active": 1
+    },
+    {
+      "id": 2,
+      "portaria_nome": "Portaria 2",
+      "id_pessoa_funcionario": 2,
+      "turno_trabalho": "Vespertino",
+      "active": 0
+    },
+    {
+      "id": 3,
+      "portaria_nome": "Portaria 3",
+      "id_pessoa_funcionario": 3,
+      "turno_trabalho": "Noturno",
+      "active": 1
+    }
+  ],
+  "veiculo": [
+    {
+      "id": 1,
+      "id_pessoa": 1,
+      "placa": "ABC1234",
+      "marca": "Fiat",
+      "modelo": "Uno",
+      "cor": "Azul",
+      "ano": 2020
+    },
+    {
+      "id": 2,
+      "id_pessoa": 2,
+      "placa": "DEF5678",
+      "marca": "VW",
+      "modelo": "Gol",
+      "cor": "Preto",
+      "ano": 2018
+    },
+    {
+      "id": 3,
+      "id_pessoa": 3,
+      "placa": "GHI9012",
+      "marca": "Ford",
+      "modelo": "Fiesta",
+      "cor": "Branco",
+      "ano": 2015
+    }
+  ],
+  "usuario": [
+    {
+      "id": 1,
+      "id_pessoa": 1,
+      "nome_usuario": "carlos.souza",
+      "senha": "admin.carlos",
+      "active": 1
+    },
+    {
+      "id": 2,
+      "id_pessoa": 2,
+      "nome_usuario": "maria.maria",
+      "senha": "maria",
+      "active": 1
+    },
+    {
+      "id": 3,
+      "id_pessoa": 3,
+      "nome_usuario": "jose.user",
+      "senha": "jose",
+      "active": 0
+    },
+    {
+      "id": 4,
+      "id_pessoa": 1,
+      "nome_usuario": "joao123master",
+      "senha": "master",
+      "active": 1
+    }
+  ],
+  "tipo": [
+    {
+      "id": 1,
+      "tipo": "admin"
+    },
+    {
+      "id": 2,
+      "tipo": "porteiro"
+    },
+    {
+      "tipo": "secretario",
+      "id": 3
+    },
+    {
+      "tipo": "faxina",
+      "id": 4
+    }
+  ]
+}

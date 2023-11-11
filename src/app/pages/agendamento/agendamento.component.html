@@ -1,0 +1,83 @@
+<head>
+    <title>{{conteudo==='agendamento'?'Agendamento':'Autorização'}}</title>
+</head>
+
+<po-tabs>
+    <po-tab [p-active]="conteudo === 'agendamento'" p-label="Agendamento" (p-click)="conteudo='agendamento'"></po-tab>
+    <po-tab [p-active]="conteudo === 'autorizacao'" p-label="Autorização" (p-click)="conteudo='autorizacao'"></po-tab>
+</po-tabs>
+
+<div *ngIf="conteudo === 'agendamento' then agendamento else autorizacao"></div>
+
+<po-modal #modalAutorizacao [p-title]="title + ' Autorização'">
+    <form [formGroup]="formAutorizacao">
+        <po-combo formControlName="id_pessoa_autoriza" [p-options]="pessoas" p-label="Autorizador"
+            name="id_pessoa_autoriza" [p-show-required]="true" [p-required]="true"></po-combo>
+        <po-combo formControlName="id_pessoa_entrada" [p-options]="pessoas" p-label="Pessoa" name="id_pessoa_entrada"
+            [p-show-required]="true" [p-required]="true"></po-combo>
+        <po-combo formControlName="id_veiculo" [p-options]="veiculos" p-label="Veículo" name="id_veiculo"
+            [p-show-required]="true" [p-required]="true"></po-combo>
+        <po-combo formControlName="id_portaria" [p-options]="portarias" p-label="Portaria" name="id_portaria"
+            [p-show-required]="true" [p-required]="true"></po-combo>
+        <po-textarea formControlName="observacao" p-label="Observação" name="observacao"
+            [p-optional]="true"></po-textarea>
+    </form>
+
+    <po-modal-footer [p-disabled-align]="false">
+        <po-button p-danger="true" p-label="Cancelar" (p-click)="fecharModal('autorizacao')"></po-button>
+        <po-button [p-disabled]="!formAutorizacao.valid" p-kind="primary"
+            [p-label]="title==='Cadastrar'?'Cadastrar':'Atualizar'" [p-loading]="loading"
+            (p-click)="this.idAutorizacao?salvar('autorizacao', this.idAutorizacao):salvar('autorizacao')"></po-button>
+    </po-modal-footer>
+</po-modal>
+
+<po-modal #modalAgendamento [p-title]="title + ' Agendamento'">
+    <form [formGroup]="formAgendamento">
+        <po-combo formControlName="id_pessoa_autoriza" [p-options]="pessoas" p-label="Autorizador"
+            name="id_pessoa_autoriza" [p-show-required]="true" [p-required]="true"></po-combo>
+        <po-combo formControlName="id_pessoa_entrada" [p-options]="pessoas" p-label="Pessoa" name="id_pessoa_entrada"
+            [p-show-required]="true" [p-required]="true"></po-combo>
+        <po-datepicker formControlName="hora_data" p-label="Data" name="hora_data" p-required></po-datepicker>
+        <po-combo formControlName="id_veiculo" [p-options]="veiculos" p-label="Veículo" name="id_veiculo"
+            [p-show-required]="true" [p-required]="true"></po-combo>
+        <po-combo formControlName="id_portaria" [p-options]="portarias" p-label="Portaria" name="id_portaria"
+            [p-show-required]="true" [p-required]="true"></po-combo>
+        <po-textarea formControlName="observacao" p-label="Observação" name="observacao"
+            [p-optional]="true"></po-textarea>
+    </form>
+
+    <po-modal-footer [p-disabled-align]="false">
+        <po-button p-danger="true" p-label="Cancelar" (p-click)="fecharModal('agendamento')"></po-button>
+        <po-button [p-disabled]="!formAgendamento.valid" p-kind="primary"
+            [p-label]="title==='Cadastrar'?'Cadastrar':'Atualizar'" [p-loading]="loading"
+            (p-click)="this.idAgendamento?salvar('agendamento', this.idAgendamento):salvar('agendamento')"></po-button>
+    </po-modal-footer>
+</po-modal>
+
+<ng-template #agendamento>
+    <po-page-list [p-actions]="actionsAgendamento" p-title="Agendamentos">
+        <po-table [p-columns]="columnsAgendamento" (p-delete-items)="apagar(id_linha)" [p-height]="700"
+            [p-infinite-scroll]="false" [p-items]="itemsAgendamento" [p-loading]="loading" [p-selectable]="true"
+            [p-selectable-entire-line]="false" (p-selected)="selecionado($event.id)" [p-single-select]="true"
+            [p-sort]="true" [p-striped]="true">
+            <ng-template p-table-cell-template let-column="column" let-row="row">
+                <span class="po-clickable po-icon po-icon-edit" style="font-size: 20px;"
+                    (click)="editar('agendamento', row.id)"></span>
+            </ng-template>
+        </po-table>
+    </po-page-list>
+</ng-template>
+
+<ng-template #autorizacao>
+    <po-page-list [p-actions]="actionsAutorizacao" p-title="Autorizações">
+        <po-table [p-columns]="columnsAutorizacao" (p-delete-items)="apagar(id_linha)" [p-height]="700"
+            [p-infinite-scroll]="false" [p-items]="itemsAutorizacao" [p-loading]="loading" [p-selectable]="true"
+            [p-selectable-entire-line]="false" (p-selected)="selecionado($event.id)" [p-single-select]="true"
+            [p-sort]="true" [p-striped]="true">
+            <ng-template p-table-cell-template let-column="column" let-row="row">
+                <span class="po-clickable po-icon po-icon-edit" style="font-size: 20px;"
+                    (click)="editar('autorizacao', row.id)"></span>
+            </ng-template>
+        </po-table>
+    </po-page-list>
+</ng-template>

@@ -1,0 +1,32 @@
+<head>
+    <title>Portaria</title>
+</head>
+
+<po-modal #modal [p-title]="title + ' Portaria'">
+    <form [formGroup]="form">
+        <po-input formControlName="portaria_nome" p-label="Nome" name="portaria_nome" [p-maxlength]="50"
+            [p-show-required]="true" p-required></po-input>
+        <po-combo formControlName="id_pessoa_funcionario" [p-options]="pessoas" p-label="Funcionário"
+            name="id_pessoa_funcionario" [p-show-required]="true" [p-required]="true"></po-combo>
+        <po-input formControlName="turno_trabalho" p-label="Turno de Trabalho" name="turno_trabalho" [p-maxlength]="10"
+            [p-show-required]="true" p-required></po-input>
+        <po-radio-group formControlName="active" p-label="Status" [p-options]="status" name="active"
+            [p-show-required]="true" [p-required]="true"></po-radio-group>
+    </form>
+
+    <po-modal-footer [p-disabled-align]="false">
+        <po-button p-danger="true" p-label="Cancelar" (p-click)="fecharModal()"></po-button>
+        <po-button [p-disabled]="!form.valid" p-kind="primary" [p-label]="title==='Cadastrar'?'Cadastrar':'Atualizar'"
+            [p-loading]="loading" (p-click)="salvar(this.id)"></po-button>
+    </po-modal-footer>
+</po-modal>
+
+<po-page-list [p-actions]="actions" p-title="Portarias">
+    <po-table [p-columns]="columns" (p-delete-items)="apagar(id_linha)" [p-height]="700" [p-infinite-scroll]="false"
+        [p-items]="items" [p-loading]="loading" [p-selectable]="true" [p-selectable-entire-line]="false"
+        (p-selected)="selecionado($event.id)" [p-single-select]="true" [p-sort]="true" [p-striped]="true">
+        <ng-template p-table-cell-template let-column="column" let-row="row">
+            <span class="po-clickable po-icon po-icon-edit" style="font-size: 20px;" (click)="editar(row.id)"></span>
+        </ng-template>
+    </po-table>
+</po-page-list>

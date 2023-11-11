@@ -1,0 +1,39 @@
+<head>
+    <title>Pessoa</title>
+</head>
+
+<po-modal #modal [p-title]="title + ' Pessoa'">
+    <form [formGroup]="form">
+        <po-input formControlName="nome" p-label="Nome" name="nome" [p-maxlength]="200" [p-show-required]="true" p-required></po-input>
+        <po-input formControlName="telefone" p-label="Telefone" (p-change)="mascara('tel', $event)"
+            [p-minlength]="10" [p-maxlength]="this.telefone?15:11" name="telefone" [p-show-required]="true" p-required></po-input>
+        <po-email formControlName="email" p-label="Email" name="email" [p-maxlength]="150" [p-show-required]="true" p-required></po-email>
+        <po-input formControlName="cpf_cnpj" p-label="CPF/CNPJ" (p-change)="mascara('doc', $event)"
+            [p-minlength]="11" [p-maxlength]="this.cpf_cnpj?18:14" name="cpf_cnpj" [p-show-required]="true" p-required></po-input>
+        <po-input formControlName="rua" p-label="Rua" name="rua" [p-maxlength]="255" [p-show-required]="true" p-required></po-input>
+        <po-input formControlName="cidade" p-label="Cidade" name="cidade" [p-maxlength]="200" [p-show-required]="true"
+            p-required></po-input>
+        <po-input formControlName="estado" p-label="Estado" name="estado" [p-maxlength]="150" [p-show-required]="true"
+            p-required></po-input>
+        <po-input formControlName="cep" p-label="CEP" name="cep" p-mask="99999-999" p-mask-format-model="false"
+            [p-show-required]="true" p-required></po-input>
+        <po-input formControlName="pais" p-label="País" name="pais" [p-maxlength]="50" [p-show-required]="true" p-required></po-input>
+        <po-radio-group formControlName="active" p-label="Status" [p-show-required]="true" [p-options]="status"
+            name="active" [p-required]="true"></po-radio-group>
+    </form>
+
+    <po-modal-footer [p-disabled-align]="false">
+        <po-button p-danger="true" p-label="Cancelar" (p-click)="fecharModal()"></po-button>
+        <po-button [p-disabled]="!form.valid" p-kind="primary" [p-label]="title==='Cadastrar'?'Cadastrar':'Atualizar'"
+            [p-loading]="loading" (p-click)="salvar(this.id)"></po-button>
+    </po-modal-footer>
+</po-modal>
+<po-page-list [p-actions]="actions" p-title="Pessoas">
+    <po-table [p-columns]="columns" (p-delete-items)="apagar(id_linha)" [p-height]="700" [p-infinite-scroll]="false"
+        [p-items]="items" [p-loading]="loading" [p-selectable]="true" [p-selectable-entire-line]="false"
+        (p-selected)="selecionado($event.id)" [p-single-select]="true" [p-sort]="true" [p-striped]="true">
+        <ng-template p-table-cell-template let-column="column" let-row="row">
+            <span class="po-clickable po-icon po-icon-edit" style="font-size: 20px;" (click)="editar(row.id)"></span>
+        </ng-template>
+    </po-table>
+</po-page-list>

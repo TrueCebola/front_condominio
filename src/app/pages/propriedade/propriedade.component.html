@@ -1,0 +1,73 @@
+<head>
+    <title>{{conteudo==='lote'?'Lote':'Condomínio'}}</title>
+</head>
+
+<po-tabs>
+    <po-tab [p-active]="conteudo === 'lote'" p-label="Lote" (p-click)="conteudo='lote'"></po-tab>
+    <po-tab [p-active]="conteudo === 'condominio'" p-label="Condomínio" (p-click)="conteudo='condominio'"></po-tab>
+</po-tabs>
+
+<div *ngIf="conteudo === 'lote' then lote else condominio"></div>
+
+<po-modal #modalCondominio [p-title]="title + ' Condomínio'">
+    <form [formGroup]="formCondominio">
+        <po-number formControlName="lote_numero" p-label="Nº de Lotes" name="lote_numero" [p-maxlength]="11"
+            [p-show-required]="true" p-required></po-number>
+        <po-input formControlName="quadra" p-label="Quadra" name="quadra" [p-maxlength]="100" [p-show-required]="true"
+            p-required></po-input>
+    </form>
+
+    <po-modal-footer [p-disabled-align]="false">
+        <po-button p-danger="true" p-label="Cancelar" (p-click)="fecharModal('condominio')"></po-button>
+        <po-button [p-disabled]="!formCondominio.valid" p-kind="primary"
+            [p-label]="title==='Cadastrar'?'Cadastrar':'Atualizar'" [p-loading]="loading"
+            (p-click)="salvar('condominio', this.idCondominio)"></po-button>
+    </po-modal-footer>
+</po-modal>
+
+<po-modal #modalLote [p-title]="title + ' Lote'">
+    <form [formGroup]="formLote">
+        <po-combo formControlName="id_pessoa" p-label="Pessoa" name="id_pessoa" [p-options]="pessoas"
+            [p-show-required]="true" [p-required]="true"></po-combo>
+        <po-input formControlName="estado" p-label="Estado" name="estado" [p-maxlength]="20" [p-show-required]="true"
+            p-required></po-input>
+    </form>
+
+    <po-modal-footer [p-disabled-align]="false">
+        <po-button p-danger="true" p-label="Cancelar" (p-click)="fecharModal('lote')"></po-button>
+        <po-button [p-disabled]="!formLote.valid" p-kind="primary"
+            [p-label]="title==='Cadastrar'?'Cadastrar':'Atualizar'" [p-loading]="loading"
+            (p-click)="salvar('lote', this.idLote)"></po-button>
+    </po-modal-footer>
+</po-modal>
+
+<ng-template #lote>
+    <po-page-list [p-actions]="actionsLote" p-title="Lotes">
+        <po-table [p-columns]="columnsLote" [p-height]="700" (p-delete-items)="apagar('lote', id_linha)"
+            (p-selected)="selecionado($event.id)" [p-infinite-scroll]="false" [p-items]="itemsLote"
+            [p-loading]="loading" [p-selectable]="true" [p-selectable-entire-line]="false" [p-single-select]="true"
+            [p-sort]="true" [p-striped]="true">
+            <ng-template p-table-cell-template let-column="column" let-row="row">
+                <span class="po-clickable po-icon po-icon-edit" style="font-size: 20px;"
+                    (click)="editar('lote', row.id)"></span>
+            </ng-template>
+        </po-table>
+    </po-page-list>
+</ng-template>
+
+<ng-template #condominio>
+    <po-page-list [p-actions]="actionsCondominio" p-title="Condomínios">
+        <po-table [p-columns]="columnsCondominio" [p-height]="700" (p-delete-items)="apagar('condominio', id_linha)"
+            (p-selected)="selecionado($event.id)" [p-infinite-scroll]="false" [p-items]="itemsCondominio"
+            [p-loading]="loading" [p-selectable]="true" [p-selectable-entire-line]="false" [p-single-select]="true"
+            [p-sort]="true" [p-striped]="true">
+            <ng-template p-table-cell-template let-column="column" let-row="row">
+                <span class="po-clickable po-icon po-icon-delete" style="font-size: 20px;"
+                    (click)="apagar('condominio', row.id)"></span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span class="po-clickable po-icon po-icon-edit" style="font-size: 20px;"
+                    (click)="editar('condominio', row.id)"></span>
+            </ng-template>
+        </po-table>
+    </po-page-list>
+</ng-template>

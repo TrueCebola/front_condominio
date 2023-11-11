@@ -1,0 +1,35 @@
+<head>
+    <title>Veículo</title>
+</head>
+
+<po-modal #modal [p-title]="title + 'Veículo'">
+    <form [formGroup]="form">
+        <po-combo formControlName="id_pessoa" [p-options]="pessoas" p-label="Pessoa" name="id_pessoa"
+            [p-show-required]="true" [p-required]="true"></po-combo>
+        <po-input formControlName="placa" p-label="Placa" p-mask="@@@-9#99" p-mask-format-model="false"
+            p-pattern="[A-Za-z]{3}[0-9]{1}[A-Za-z0-9]{1}[0-9]{2}" name="placa" [p-show-required]="true"
+            p-required></po-input>
+        <po-input formControlName="marca" p-label="Marca" name="marca" [p-maxlength]="50" [p-show-required]="true" p-required></po-input>
+        <po-input formControlName="modelo" p-label="Modelo" name="modelo" [p-maxlength]="50" [p-show-required]="true"
+            p-required></po-input>
+        <po-input formControlName="cor" p-label="Cor" name="cor" [p-maxlength]="15" [p-show-required]="true" p-required></po-input>
+        <po-number formControlName="ano" p-label="Ano" name="ano" [p-minlength]="4" [p-maxlength]="4"
+            [p-show-required]="true" p-required></po-number>
+    </form>
+
+    <po-modal-footer [p-disabled-align]="false">
+        <po-button p-danger="true" p-label="Cancelar" (p-click)="fecharModal()"></po-button>
+        <po-button [p-disabled]="!form.valid" p-kind="primary" [p-label]="title==='Cadastrar'?'Cadastrar':'Atualizar'"
+            [p-loading]="loading" (p-click)="salvar(this.id)"></po-button>
+    </po-modal-footer>
+</po-modal>
+
+<po-page-list [p-actions]="actions" p-title="Veículos">
+    <po-table [p-columns]="columns" (p-delete-items)="apagar(id_linha)" [p-height]="700" [p-infinite-scroll]="false"
+        [p-items]="items" [p-loading]="loading" [p-selectable]="true" [p-selectable-entire-line]="false"
+        (p-selected)="selecionado($event.id)" [p-single-select]="true" [p-sort]="true" [p-striped]="true">
+        <ng-template p-table-cell-template let-column="column" let-row="row">
+            <span class="po-clickable po-icon po-icon-edit" style="font-size: 20px;" (click)="editar(row.id)"></span>
+        </ng-template>
+    </po-table>
+</po-page-list>

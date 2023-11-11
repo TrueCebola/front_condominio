@@ -1,0 +1,4 @@
+<app-navbar [hidden]="isLogin"></app-navbar>
+<div class="router-outlet" [style]="isLogin?'':'margin-top:56px'">
+    <router-outlet></router-outlet>
+</div>
